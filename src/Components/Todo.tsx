@@ -1,4 +1,4 @@
-import SearchBar from "./SearchBar";
+import AddTaskBar from "./AddTaskBar";
 import TodoList from "./TodoList";
 
 const Todo = () => {
@@ -8,7 +8,7 @@ const Todo = () => {
       className="m-auto w-3xl space-y-8 rounded-xl bg-white p-8"
     >
       <Heading />
-      <SearchBar />
+      <AddTaskBar />
       <TodoList />
     </div>
   );
