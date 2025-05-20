@@ -31,8 +31,11 @@ const AddTaskBar = () => {
         placeholder="Add your task"
         className="h-12 w-4/5 outline-none"
         type="text"
-        name="add-task"
-        id="add-task"
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleAddTodoItem();
+          }
+        }}
       />
       <button
         type="button"
