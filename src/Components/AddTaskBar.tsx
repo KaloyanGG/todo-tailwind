@@ -8,10 +8,22 @@ const AddTaskBar = () => {
   const [inputValue, setInputValue] = useState("");
   const handleAddTodoItem = () => {
     setTodoList((prev) => {
+      const id = v4();
+      const inputValueTrimmed = inputValue.trim();
+      localStorage.setItem(
+        "todos",
+        JSON.stringify({
+          ...prev,
+          [id]: {
+            content: inputValueTrimmed,
+            status: "active",
+          },
+        }),
+      );
       return {
         ...prev,
-        [v4()]: {
-          content: inputValue.trim(),
+        [id]: {
+          content: inputValueTrimmed,
           status: "active",
         },
       };

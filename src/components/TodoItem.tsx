@@ -15,7 +15,7 @@ const TodoItem = ({ id, item, handleCheck }: TodoItemProps) => {
         onChange={() => handleCheck(id)}
         checked={item.status === "done"}
       />
-      <p className="ml-2 peer-checked:text-[var(--gray)] peer-checked:line-through">
+      <p className="ml-4 peer-checked:text-[var(--gray)] peer-checked:line-through">
         {item.content}
       </p>
       <button

@@ -11,7 +11,7 @@ const Todo = () => {
   return (
     <div
       id="todo-component"
-      className="m-auto max-w-3xl space-y-8 rounded-xl bg-white px-4 py-8"
+      className="m-auto max-w-2xl space-y-8 rounded-xl bg-white px-4 py-8"
     >
       <Heading />
       <AddTaskBar />
