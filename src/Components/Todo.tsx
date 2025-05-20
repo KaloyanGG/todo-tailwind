@@ -1,6 +1,12 @@
 import AddTaskBar from "./AddTaskBar";
 import TodoList from "./TodoList";
 
+export type Status = "active" | "done";
+export type TodoItem = {
+  content: string;
+  status: Status;
+};
+
 const Todo = () => {
   return (
     <div
