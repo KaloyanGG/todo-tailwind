@@ -7,9 +7,13 @@ const AddTaskBar = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState("");
   const handleAddTodoItem = () => {
+    const inputValueTrimmed = inputValue.trim();
+    if (inputValueTrimmed === "") {
+      inputRef.current?.focus();
+      return;
+    }
     setTodoList((prev) => {
       const id = v4();
-      const inputValueTrimmed = inputValue.trim();
       localStorage.setItem(
         "todos",
         JSON.stringify({
