@@ -8,37 +8,33 @@ export type TodoItemType = {
 };
 
 const TodoList = () => {
-  const { todoList, setTodoList } = useTodoListContext();
+  const { todoList, dispatch } = useTodoListContext();
 
   const handleCheck = (id: string) => {
-    setTodoList((prev) => {
-      localStorage.setItem(
-        "todos",
-        JSON.stringify({
-          ...prev,
-          [id]: {
-            ...prev[id],
-            status: prev[id].status === "done" ? "active" : "done",
-          },
-        }),
-      );
-      return {
-        ...prev,
-        [id]: {
-          ...prev[id],
-          status: prev[id].status === "done" ? "active" : "done",
-        },
-      };
-    });
+    // setTodoList((prev) => {
+    //   localStorage.setItem(
+    //     "todos",
+    //     JSON.stringify({
+    //       ...prev,
+    //       [id]: {
+    //         ...prev[id],
+    //         status: prev[id].status === "done" ? "active" : "done",
+    //       },
+    //     }),
+    //   );
+    //   return {
+    //     ...prev,
+    //     [id]: {
+    //       ...prev[id],
+    //       status: prev[id].status === "done" ? "active" : "done",
+    //     },
+    //   };
+    // });
+    dispatch({ type: "checkTask", payload: { id: id } });
   };
 
   const handleDeleteItem = (id: string) => {
-    setTodoList((prev) => {
-      const updatedList = { ...prev };
-      delete updatedList[id];
-      localStorage.setItem("todos", JSON.stringify(updatedList));
-      return updatedList;
-    });
+    dispatch({ type: "removeTask", payload: { id: id } });
   };
 
   return (

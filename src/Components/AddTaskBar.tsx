@@ -3,7 +3,7 @@ import useTodoListContext from "../hooks/useTodoListContext";
 import { v4 } from "uuid";
 
 const AddTaskBar = () => {
-  const { setTodoList } = useTodoListContext();
+  const { dispatch } = useTodoListContext();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState("");
   const handleAddTodoItem = () => {
@@ -12,26 +12,11 @@ const AddTaskBar = () => {
       inputRef.current?.focus();
       return;
     }
-    setTodoList((prev) => {
-      const id = v4();
-      localStorage.setItem(
-        "todos",
-        JSON.stringify({
-          ...prev,
-          [id]: {
-            content: inputValueTrimmed,
-            status: "active",
-          },
-        }),
-      );
-      return {
-        ...prev,
-        [id]: {
-          content: inputValueTrimmed,
-          status: "active",
-        },
-      };
+    dispatch({
+      type: "addTask",
+      payload: { content: inputValueTrimmed, id: v4() },
     });
+
     setInputValue("");
     inputRef.current?.focus();
   };

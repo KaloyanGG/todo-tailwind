@@ -1,10 +1,13 @@
 import AddTaskBar from "./AddTaskBar";
 import TodoList from "./TodoList";
 
-export type Status = "active" | "done";
+export const STATUSES = {
+  ACTIVE: "active",
+  DONE: "done",
+} as const;
 export type TodoItem = {
   content: string;
-  status: Status;
+  status: (typeof STATUSES)[keyof typeof STATUSES];
 };
 
 const Todo = () => {
