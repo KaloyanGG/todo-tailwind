@@ -4,13 +4,19 @@ type TodoItemProps = {
   item: TodoItemType;
   id: string;
   handleCheck: (id: string) => void;
+  handleDeleteItem: (id: string) => void;
 };
 
-const TodoItem = ({ id, item, handleCheck }: TodoItemProps) => {
+const TodoItem = ({
+  id,
+  item,
+  handleCheck,
+  handleDeleteItem,
+}: TodoItemProps) => {
   return (
     <div className="flex items-center pr-4">
       <input
-        className="fancy-checkbox-input peer relative aspect-square h-6 cursor-pointer appearance-none rounded-full border-[1px] border-[var(--gray)] transition-colors duration-500 ease-in-out after:absolute after:h-1/4 after:w-1/2 after:translate-x-[50%] after:translate-y-[130%] after:rotate-[-45deg] after:border-b-2 after:border-l-2 after:border-white after:opacity-0 after:transition-opacity after:duration-200 after:ease-in-out after:content-[''] checked:border-none checked:bg-[var(--orange)] checked:after:opacity-100"
+        className="fancy-checkbox-input peer relative h-8 w-8 cursor-pointer appearance-none rounded-full border-[1px] border-[var(--gray)] transition-colors duration-500 ease-in-out after:absolute after:h-1/4 after:w-1/2 after:translate-x-[50%] after:translate-y-[130%] after:rotate-[-45deg] after:border-b-2 after:border-l-2 after:border-white after:opacity-0 after:transition-opacity after:duration-200 after:ease-in-out checked:border-none checked:bg-[var(--orange)] checked:after:opacity-100"
         type="checkbox"
         onChange={() => handleCheck(id)}
         checked={item.status === "done"}
@@ -19,6 +25,7 @@ const TodoItem = ({ id, item, handleCheck }: TodoItemProps) => {
         {item.content}
       </p>
       <button
+        onClick={() => handleDeleteItem(id)}
         type="button"
         className="translate relative z-10 ml-auto cursor-pointer font-semibold text-[var(--gray)] after:absolute after:top-[-15%] after:left-[-15%] after:-z-10 after:hidden after:h-[130%] after:w-[130%] after:rounded-full after:bg-gray-100 hover:after:block"
       >

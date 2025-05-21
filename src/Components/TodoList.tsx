@@ -32,6 +32,15 @@ const TodoList = () => {
     });
   };
 
+  const handleDeleteItem = (id: string) => {
+    setTodoList((prev) => {
+      const updatedList = { ...prev };
+      delete updatedList[id];
+      localStorage.setItem("todos", JSON.stringify(updatedList));
+      return updatedList;
+    });
+  };
+
   return (
     <div id="todo-list" className="h-64 space-y-3 overflow-y-auto">
       {Object.entries(todoList).map(([id, todoItem]) => {
@@ -41,6 +50,7 @@ const TodoList = () => {
             id={id}
             item={todoItem}
             handleCheck={handleCheck}
+            handleDeleteItem={handleDeleteItem}
           />
         );
       })}
