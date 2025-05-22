@@ -22,7 +22,7 @@ function App() {
   }, [todoList]);
 
   return (
-    <main className="min-h-dvh bg-rose-100 py-10">
+    <main className="flex h-svh min-h-svh bg-rose-100">
       <TodoListContext.Provider value={{ todoList, dispatch }}>
         <Todo />
       </TodoListContext.Provider>

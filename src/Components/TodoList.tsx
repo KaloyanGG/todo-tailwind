@@ -11,25 +11,6 @@ const TodoList = () => {
   const { todoList, dispatch } = useTodoListContext();
 
   const handleCheck = (id: string) => {
-    // setTodoList((prev) => {
-    //   localStorage.setItem(
-    //     "todos",
-    //     JSON.stringify({
-    //       ...prev,
-    //       [id]: {
-    //         ...prev[id],
-    //         status: prev[id].status === "done" ? "active" : "done",
-    //       },
-    //     }),
-    //   );
-    //   return {
-    //     ...prev,
-    //     [id]: {
-    //       ...prev[id],
-    //       status: prev[id].status === "done" ? "active" : "done",
-    //     },
-    //   };
-    // });
     dispatch({ type: "checkTask", payload: { id: id } });
   };
 
@@ -38,7 +19,7 @@ const TodoList = () => {
   };
 
   return (
-    <div id="todo-list" className="h-64 space-y-3 overflow-y-auto">
+    <div id="todo-list" className="space-y-3 overflow-y-auto">
       {Object.entries(todoList).map(([id, todoItem]) => {
         return (
           <TodoItem
