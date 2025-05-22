@@ -24,19 +24,6 @@ export const addTodo = async (todo: TodoItem) => {
   return docRef.id;
 };
 
-// export const getAllTodos = async () => {
-//   const todoRef = collection(db, COLLECTION_NAME);
-//   const querySnapshot = await getDocs(todoRef);
-//   const todos: Record<string, TodoItem> = {};
-//   querySnapshot.forEach((doc) => {
-//     todos[doc.id] = {
-//       content: doc.data().content,
-//       status: doc.data().status,
-//     };
-//   });
-//   return todos;
-// };
-
 export const listenToTodos = (
   cb: (todos: Record<string, TodoItem>) => void,
 ) => {
