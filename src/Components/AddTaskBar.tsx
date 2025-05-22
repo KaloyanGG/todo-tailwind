@@ -1,21 +1,23 @@
 import { useRef, useState } from "react";
-import useTodoListContext from "../hooks/useTodoListContext";
-import { v4 } from "uuid";
+import { addTodo } from "../services/todo";
 
 const AddTaskBar = () => {
-  const { dispatch } = useTodoListContext();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState("");
-  const handleAddTodoItem = () => {
+  const handleAddTodoItem = async () => {
     const inputValueTrimmed = inputValue.trim();
     if (inputValueTrimmed === "") {
       inputRef.current?.focus();
       return;
     }
-    dispatch({
-      type: "addTask",
-      payload: { content: inputValueTrimmed, id: v4() },
-    });
+    try {
+      await addTodo({
+        content: inputValueTrimmed,
+        status: "active",
+      });
+    } catch (err) {
+      alert("Error adding todo item, please check the logs");
+    }
 
     setInputValue("");
     inputRef.current?.focus();
