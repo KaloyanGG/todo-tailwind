@@ -9,10 +9,12 @@ import { listenToTodos } from "./services/todo";
 function App() {
   const [todoList, setTodoList] = useState<Record<string, TodoItem>>({});
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(true);
 
   useEffect(() => {
     const unsubAuth = onAuthStateChanged(auth, (user) => {
       setIsAuthenticated(!!user);
+      setCheckingAuth(false);
     });
 
     let unsubTodos: () => void;
@@ -28,6 +30,8 @@ function App() {
       unsubTodos?.();
     };
   }, [isAuthenticated]);
+
+  if (checkingAuth) return <div className="h-screen w-screen bg-rose-100" />;
 
   if (!isAuthenticated)
     return <Login onLogin={() => setIsAuthenticated(true)} />;
