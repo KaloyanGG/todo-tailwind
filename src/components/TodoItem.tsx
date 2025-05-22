@@ -1,9 +1,10 @@
+import { STATUSES, type Status } from "./Todo";
 import type { TodoItemType } from "./TodoList";
 
 type TodoItemProps = {
   item: TodoItemType;
   id: string;
-  handleCheck: (id: string) => void;
+  handleCheck: (id: string, status: Status) => void;
   handleDeleteItem: (id: string) => void;
 };
 
@@ -18,7 +19,12 @@ const TodoItem = ({
       <input
         className="fancy-checkbox-input peer relative h-8 w-8 cursor-pointer appearance-none rounded-full border-[1px] border-[var(--gray)] transition-colors duration-500 ease-in-out after:absolute after:h-1/4 after:w-1/2 after:translate-x-[50%] after:translate-y-[130%] after:rotate-[-45deg] after:border-b-2 after:border-l-2 after:border-white after:opacity-0 after:transition-opacity after:duration-200 after:ease-in-out checked:border-none checked:bg-[var(--orange)] checked:after:opacity-100"
         type="checkbox"
-        onChange={() => handleCheck(id)}
+        onChange={() =>
+          handleCheck(
+            id,
+            item.status === STATUSES.ACTIVE ? STATUSES.DONE : STATUSES.ACTIVE,
+          )
+        }
         checked={item.status === "done"}
       />
       <p className="ml-4 peer-checked:text-[var(--gray)] peer-checked:line-through">

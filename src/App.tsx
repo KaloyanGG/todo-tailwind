@@ -1,47 +1,40 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import { TodoListContext } from "./context/todoListContext";
-import { todoListReducer } from "./context/todoListReducer";
-import Todo from "./components/Todo";
+import Todo, { type TodoItem } from "./components/Todo";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/firebase";
 import Login from "./components/Login";
+import { listenToTodos } from "./services/todo";
 
 function App() {
-  const [todoList, dispatch] = useReducer(todoListReducer, {});
-
+  const [todoList, setTodoList] = useState<Record<string, TodoItem>>({});
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
+    const unsubAuth = onAuthStateChanged(auth, (user) => {
       setIsAuthenticated(!!user);
     });
-    return () => unsub();
-  }, []);
 
-  useEffect(() => {
-    if (!isAuthenticated) return;
+    let unsubTodos: () => void;
 
-    const localStorageTodos = localStorage.getItem("todos");
-
-    if (localStorageTodos) {
-      dispatch({
-        type: "setTasks",
-        payload: JSON.parse(localStorageTodos),
+    if (isAuthenticated) {
+      unsubTodos = listenToTodos((todos) => {
+        setTodoList(todos);
       });
     }
-  }, [isAuthenticated]);
 
-  useEffect(() => {
-    if (!isAuthenticated) return;
-    localStorage.setItem("todos", JSON.stringify(todoList));
-  }, [todoList, isAuthenticated]);
+    return () => {
+      unsubAuth();
+      unsubTodos?.();
+    };
+  }, [isAuthenticated]);
 
   if (!isAuthenticated)
     return <Login onLogin={() => setIsAuthenticated(true)} />;
 
   return (
     <main className="flex h-svh min-h-svh bg-rose-100">
-      <TodoListContext.Provider value={{ todoList, dispatch }}>
+      <TodoListContext.Provider value={{ todoList }}>
         <Todo />
       </TodoListContext.Provider>
     </main>

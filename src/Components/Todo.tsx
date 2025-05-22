@@ -5,9 +5,10 @@ export const STATUSES = {
   ACTIVE: "active",
   DONE: "done",
 } as const;
+export type Status = (typeof STATUSES)[keyof typeof STATUSES];
 export type TodoItem = {
   content: string;
-  status: (typeof STATUSES)[keyof typeof STATUSES];
+  status: Status;
 };
 
 const Todo = () => {

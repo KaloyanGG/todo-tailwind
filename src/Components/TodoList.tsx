@@ -1,4 +1,5 @@
 import useTodoListContext from "../hooks/useTodoListContext";
+import { deleteTodo, toggleTodoStatus } from "../services/todo";
 import TodoItem from "./TodoItem";
 
 type Status = "active" | "done";
@@ -8,14 +9,14 @@ export type TodoItemType = {
 };
 
 const TodoList = () => {
-  const { todoList, dispatch } = useTodoListContext();
+  const { todoList } = useTodoListContext();
 
-  const handleCheck = (id: string) => {
-    dispatch({ type: "checkTask", payload: { id: id } });
+  const handleCheck = (id: string, status: Status) => {
+    toggleTodoStatus(id, status);
   };
 
   const handleDeleteItem = (id: string) => {
-    dispatch({ type: "removeTask", payload: { id: id } });
+    deleteTodo(id);
   };
 
   return (
