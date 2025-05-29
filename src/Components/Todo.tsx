@@ -5,16 +5,17 @@ export const STATUSES = {
   ACTIVE: "active",
   DONE: "done",
 } as const;
+export type Status = (typeof STATUSES)[keyof typeof STATUSES];
 export type TodoItem = {
   content: string;
-  status: (typeof STATUSES)[keyof typeof STATUSES];
+  status: Status;
 };
 
 const Todo = () => {
   return (
     <div
       id="todo-component"
-      className="m-auto h-full w-full max-w-xl space-y-8 overflow-y-scroll rounded-xl bg-white px-4 py-8 md:h-4/5 md:w-4/5"
+      className="m-auto h-full w-full max-w-xl space-y-8 overflow-y-auto rounded-xl bg-white px-4 py-8 md:h-4/5 md:w-4/5"
     >
       <Heading />
       <AddTaskBar />
