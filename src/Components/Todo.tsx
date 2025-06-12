@@ -1,3 +1,4 @@
+import firebase from "firebase/compat/app";
 import AddTaskBar from "./AddTaskBar";
 import TodoList from "./TodoList";
 
@@ -9,6 +10,7 @@ export type Status = (typeof STATUSES)[keyof typeof STATUSES];
 export type TodoItem = {
   content: string;
   status: Status;
+  reminder: Date | null;
 };
 
 const Todo = () => {

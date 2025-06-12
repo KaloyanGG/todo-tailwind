@@ -21,6 +21,7 @@ function App() {
 
     if (isAuthenticated) {
       unsubTodos = listenToTodos((todos) => {
+        console.log(todos);
         setTodoList(todos);
       });
     }
