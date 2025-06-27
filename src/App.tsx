@@ -3,8 +3,8 @@ import { TodoListContext } from "./context/todoListContext";
 import Todo, { type TodoItem } from "./components/Todo";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/firebase";
-import Login from "./components/Login";
 import { listenToTodos } from "./services/todo";
+import Login from "./Components/Login";
 
 function App() {
   const [todoList, setTodoList] = useState<Record<string, TodoItem>>({});
