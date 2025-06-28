@@ -14,6 +14,29 @@ function App() {
   
   const [devToolsShown, setDevToolsShown] = useState(false);
 
+  useEffect(()=>{
+      if (!("Notification" in window)) {
+      console.info("This browser does not support desktop notification");
+      return;
+    }
+
+    if (!window.isSecureContext) {
+      console.info("Cannot request notification permission on insecure origin.");
+      return;
+    }
+
+    const permission =  Notification.requestPermission().then(permission=>{
+
+      if (permission === "granted") {
+        new Notification("Notifications enabled!", {
+          body: "You'll now receive updates.",
+        });
+      } else {
+        console.info("Notification permission:", permission);
+      }
+    });
+  },[])
+
   useEffect(() => {
     const unsubAuth = onAuthStateChanged(auth, (user) => {
       setIsAuthenticated(!!user);
@@ -37,8 +60,8 @@ function App() {
 
   if (checkingAuth) return <div className="h-screen w-screen bg-rose-100" />;
 
-  if (!isAuthenticated)
-    return <Login onLogin={() => setIsAuthenticated(true)} />;
+  // if (!isAuthenticated)
+  //   return <Login onLogin={() => setIsAuthenticated(true)} />;
 
   return (
     <main className="flex h-svh min-h-svh bg-rose-100">

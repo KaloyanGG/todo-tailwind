@@ -4,7 +4,12 @@ const DevTools = ({ hidden }: { hidden: boolean }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const handleRequestNotificationsPermissionClick = async () => {
     if (!("Notification" in window)) {
-      console.warn("This browser does not support desktop notification");
+      console.info("This browser does not support desktop notification");
+      return;
+    }
+
+    if (!window.isSecureContext) {
+      console.info("Cannot request notification permission on insecure origin.");
       return;
     }
 
@@ -18,8 +23,8 @@ const DevTools = ({ hidden }: { hidden: boolean }) => {
     }
   };
 
-  const handleClearLogsClick = ()=>{
-    textAreaRef.current!.value=''
+  const handleClearLogsClick = () => {
+    textAreaRef.current!.value = ''
   }
 
   return (
