@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { addTodo } from "../services/todo";
+import { addTodo } from "../services/todo.service";
 import { STATUSES } from "./Todo";
 
 const AddTaskBar = () => {
