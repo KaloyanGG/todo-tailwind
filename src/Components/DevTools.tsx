@@ -1,26 +1,10 @@
 import { useRef, type ButtonHTMLAttributes } from "react"
+import { requestNotificationsPermission } from "../services/notifications.service";
 
 const DevTools = ({ hidden }: { hidden: boolean }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const handleRequestNotificationsPermissionClick = async () => {
-    if (!("Notification" in window)) {
-      console.info("This browser does not support desktop notification");
-      return;
-    }
-
-    if (!window.isSecureContext) {
-      console.info("Cannot request notification permission on insecure origin.");
-      return;
-    }
-
-    const permission = await Notification.requestPermission();
-    if (permission === "granted") {
-      new Notification("Notifications enabled!", {
-        body: "You'll now receive updates.",
-      });
-    } else {
-      console.info("Notification permission:", permission);
-    }
+    await requestNotificationsPermission();
   };
 
   const handleClearLogsClick = () => {
@@ -33,9 +17,7 @@ const DevTools = ({ hidden }: { hidden: boolean }) => {
       <DevToolsButton className="bg-green-50" text="Register Service worker" />
       <DevToolsButton onClick={handleClearLogsClick} className="bg-blue-50" text="Clear Logs" />
 
-      <textarea ref={textAreaRef} id="special-log" className="mt-auto bg-white w-full min-h-1/2 p-1 text-sm">
-
-      </textarea>
+      <textarea ref={textAreaRef} id="special-log" className="mt-auto bg-white w-full min-h-1/2 p-1 text-sm"></textarea>
     </div>
   )
 }

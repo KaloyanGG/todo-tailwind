@@ -1,6 +1,8 @@
 import firebase from "firebase/compat/app";
 import AddTaskBar from "./AddTaskBar";
 import TodoList from "./TodoList";
+import { useEffect } from "react";
+import { requestNotificationsPermission } from "../services/notifications.service";
 
 export const STATUSES = {
   ACTIVE: "active",
@@ -14,6 +16,9 @@ export type TodoItem = {
 };
 
 const Todo = () => {
+  useEffect(() => {
+    requestNotificationsPermission()
+  }, [])
   return (
     <div
       id="todo-component"
