@@ -3,15 +3,14 @@ import { TodoListContext } from "./context/todoListContext";
 import Todo, { type TodoItem } from "./components/Todo";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/firebase";
-import { listenToTodos } from "./services/todo";
-import Login from "./Components/Login";
-import DevTools from "./Components/DevTools";
+import { listenToTodos } from "./services/todo.service";
+import DevTools from "./components/DevTools";
+import Login from "./components/Login";
 
 function App() {
   const [todoList, setTodoList] = useState<Record<string, TodoItem>>({});
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
-  
   const [devToolsShown, setDevToolsShown] = useState(false);
 
   useEffect(()=>{
@@ -25,9 +24,9 @@ function App() {
       return;
     }
 
-    const permission =  Notification.requestPermission().then(permission=>{
-
+    Notification.requestPermission().then(permission=>{
       if (permission === "granted") {
+        console.info('Notifications enabled!')
         new Notification("Notifications enabled!", {
           body: "You'll now receive updates.",
         });
