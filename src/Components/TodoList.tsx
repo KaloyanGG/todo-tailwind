@@ -1,5 +1,5 @@
 import useTodoListContext from "../hooks/useTodoListContext";
-import { deleteTodo, toggleTodoStatus } from "../services/todo";
+import { deleteTodo, toggleTodoStatus } from "../services/todo.service";
 import TodoItem from "./TodoItem";
 
 type Status = "active" | "done";
