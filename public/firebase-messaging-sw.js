@@ -23,22 +23,6 @@ const app = firebase.initializeApp(firebaseConfig);
 // Retrieve Firebase Messaging object
 const messaging = firebase.messaging(app);
 
-// Handle background messages
-messaging.onBackgroundMessage((payload) => {
-  console.log("Received background message: ", payload);
-
-  const notificationTitle = payload.notification.title || "Notification";
-  const notificationOptions = {
-    body: payload.notification.body || "You have a new message",
-    // icon: "./baby.png",
-  };
-
-  return sw.registration.showNotification(
-    notificationTitle,
-    notificationOptions
-  );
-});
-
 sw.addEventListener("activate", () => {});
 sw.addEventListener("install", () => {
   console.log('SW installed!')

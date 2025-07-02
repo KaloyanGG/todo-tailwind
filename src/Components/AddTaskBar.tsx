@@ -3,8 +3,6 @@ import { addTodo } from "../services/todo.service";
 import { STATUSES } from "./Todo";
 
 const AddTaskBar = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [inputValue, setInputValue] = useState("");
   const [showReminderLabel, setShowReminderLabel] = useState(true);
   const reminderRef = useRef<HTMLInputElement>(null);
 
