@@ -7,7 +7,6 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    // basicSsl(),
     ...(process.env.NODE_ENV === 'development' ? [basicSsl()] : []),
   ],
 });

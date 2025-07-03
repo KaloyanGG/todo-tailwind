@@ -15,9 +15,11 @@ export type TodoItem = {
 };
 
 const Todo = () => {
+
   useEffect(() => {
     requestNotificationsPermission()
   }, [])
+  
   return (
     <div
       id="todo-component"

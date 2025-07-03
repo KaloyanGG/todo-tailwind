@@ -2,6 +2,10 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
 
+
+//TODO Go the the "FCM Reminders Setup" chat in gpt and follow the polling approach
+
+// TODO Remove in prod at the end
 // if(import.meta.env.MODE==='development'){
 
   window.onerror = function (message, source, lineno, colno, error) {
