@@ -13,7 +13,10 @@
     "host": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy:functions": "npm --prefix functions run build && firebase deploy --only functions",
+    "deploy:hosting": "npm run build && firebase deploy --only hosting",
+    "deploy:all": "npm run build && npm --prefix functions run build && firebase deploy"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.7",
