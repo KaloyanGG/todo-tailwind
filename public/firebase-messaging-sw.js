@@ -18,13 +18,11 @@ const firebaseConfig = {
   appId: "1:459795594912:web:9684c82e72d910577993c5"
 };
 
-const app = firebase.initializeApp(firebaseConfig);
-
-// Retrieve Firebase Messaging object
-const messaging = firebase.messaging(app);
+let app; 
 
 sw.addEventListener("activate", () => {});
 sw.addEventListener("install", () => {
+  app = firebase.initializeApp(firebaseConfig);
   console.log('SW installed!')
 });
 
@@ -38,10 +36,11 @@ sw.addEventListener("notificationclick", (event) => {
 self.addEventListener('push', function (event) {
     if (!event.data) return;
 
-    const data = event.data.json();
+    const notification = event.data.json().notification;
+    console.log('Push event received:', notification);
     event.waitUntil(
-        self.registration.showNotification(payload.notification.title, {
-            body: data.body,
+        self.registration.showNotification(notification.title, {
+            body: notification.body,
             vibrate: [200, 100, 200],
             // data: payload.data,
             // requireInteraction: true

@@ -14,7 +14,7 @@ import type { Status, TodoItem } from "../components/Todo";
 import { db } from "../config/firebase";
 
 const COLLECTION_NAME = "todos";
-export const addTodo = async (todo: TodoItem) => {
+export const addTodo = async (todo: Omit<TodoItem, 'notified'>) => {
   const { content, status, reminder } = todo;
   const todoRef = collection(db, COLLECTION_NAME);
   const docRef = await addDoc(todoRef, {
@@ -22,6 +22,7 @@ export const addTodo = async (todo: TodoItem) => {
     status,
     createdAt: serverTimestamp(),
     reminder: reminder ? Timestamp.fromDate(reminder) : null,
+    notified: false
   });
   return docRef.id;
 };

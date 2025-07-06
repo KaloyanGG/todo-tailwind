@@ -6,6 +6,8 @@ const AddTaskBar = () => {
   const [showReminderLabel, setShowReminderLabel] = useState(true);
   const reminderRef = useRef<HTMLInputElement>(null);
 
+  const [reminderValue, setReminderValue] = useState("");
+
   useEffect(() => {
     if (!showReminderLabel) {
       // Wait until input is shown, then focus
@@ -67,10 +69,27 @@ const AddTaskBar = () => {
             placeholder="hi"
             name="reminder"
             id="reminder"
-            className="w-full p-1 text-[var(--gray)] outline-none"
-            onBlur={(e) => {
-              if (!e.currentTarget.value) {
+            value={reminderValue}
+            className={`text-xs w-full p-1 ${reminderValue ? 'text-black' : 'text-[var(--gray)]'} outline-none`}
+            min={new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60_000).toISOString().slice(0, 16)}
+            onFocus={() => {
+              if (!reminderValue) {
+                const nextMinute = new Date(Date.now() + 60_000);
+                const localDateTime = new Date(nextMinute.getTime() - nextMinute.getTimezoneOffset() * 60_000)
+                  .toISOString()
+                  .slice(0, 16);
+                setReminderValue(localDateTime);
+              }
+            }}
+            onChange={(e) => {
+              const value = e.target.value;
+
+              if (!value) {
+                setReminderValue("");
                 setShowReminderLabel(true);
+                setTimeout(() => reminderRef.current?.blur(), 0);
+              } else {
+                setReminderValue(value);
               }
             }}
           />

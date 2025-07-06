@@ -12,6 +12,7 @@ export type TodoItem = {
   content: string;
   status: Status;
   reminder: Date | null;
+  notified: boolean;
 };
 
 const Todo = () => {
