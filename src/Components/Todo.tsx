@@ -1,5 +1,7 @@
 import AddTaskBar from "./AddTaskBar";
 import TodoList from "./TodoList";
+import { useEffect } from "react";
+import { requestNotificationsPermission } from "../services/notifications.service";
 
 export const STATUSES = {
   ACTIVE: "active",
@@ -9,9 +11,16 @@ export type Status = (typeof STATUSES)[keyof typeof STATUSES];
 export type TodoItem = {
   content: string;
   status: Status;
+  reminder: Date | null;
+  notified: boolean;
 };
 
 const Todo = () => {
+
+  useEffect(() => {
+    requestNotificationsPermission()
+  }, [])
+  
   return (
     <div
       id="todo-component"
