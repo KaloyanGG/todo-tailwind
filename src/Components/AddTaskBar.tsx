@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { addTodo } from "../services/todo.service";
 import { STATUSES } from "./Todo";
+import "./style.css"
 
 const AddTaskBar = () => {
   const [showReminderLabel, setShowReminderLabel] = useState(true);
@@ -52,7 +53,7 @@ const AddTaskBar = () => {
         name="task-input"
         required
       />
-      <div id="reminder-container" className="flex w-1/4 min-w-44 items-center">
+      <div id="reminder-container" className="flex w-2/5 items-center">
         {showReminderLabel ? (
           <button
             className="h-full w-full text-start text-[var(--gray)]"
@@ -70,7 +71,7 @@ const AddTaskBar = () => {
             name="reminder"
             id="reminder"
             value={reminderValue}
-            className={`text-xs w-full p-1 ${reminderValue ? 'text-black' : 'text-[var(--gray)]'} outline-none`}
+            className={` text-xs w-full p-1 ${reminderValue ? 'text-black' : 'text-[var(--gray)]'} outline-none`}
             min={new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60_000).toISOString().slice(0, 16)}
             onFocus={() => {
               if (!reminderValue) {
