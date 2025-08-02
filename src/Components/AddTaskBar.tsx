@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { addTodo } from "../services/todo.service";
 import { STATUSES } from "./Todo";
-import "./style.css"
 
 const AddTaskBar = () => {
   const [showReminderLabel, setShowReminderLabel] = useState(true);
