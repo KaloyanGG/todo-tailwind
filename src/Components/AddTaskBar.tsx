@@ -97,7 +97,7 @@ const AddTaskBar = () => {
       </div>
       <button
         type="submit"
-        className="w-1/5 min-w-24 rounded-full bg-[var(--orange)] text-white"
+        className="w-1/5 min-w-24 rounded-full bg-primary text-white"
       >
         ADD
       </button>
