@@ -1,11 +1,31 @@
 @import "tailwindcss";
 
+/* TODO change all colors, see video for the colors
+ */
+
 @theme {
+  --color-bg-dark: hsl(0 0% 90%);
+  --color-bg: hsl(0 0% 95%);
+  --color-bg-light: hsl(0 0% 100%);
+
   --color-primary: var(--color-orange-600);
+
+  --color-text-primary: black;
+  --color-text-muted: black;
 }
 
 [data-theme="dark"] {
-  --color-primary: var(--color-yellow-400);
+  --color-bg-dark: hsl(0 0% 0%);
+  --color-bg: hsl(0 0% 5%);
+  --color-bg-light: hsl(0 0% 10%);
+
+  --color-primary: #5adbb5;
+
+  --color-text-primary: hsl(0 0% 95%);
+
+  /* TODO use text-muted somwhere */
+  --color-text-muted: hsl(0 0% 70%);
+
 }
 
 @layer base {

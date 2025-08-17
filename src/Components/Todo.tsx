@@ -24,7 +24,7 @@ const Todo = () => {
   return (
     <div
       id="todo-component"
-      className="m-auto h-full w-full max-w-xl space-y-8 overflow-y-auto rounded-xl bg-white px-4 py-8 md:h-4/5 md:w-4/5"
+      className="m-auto h-full w-full max-w-xl space-y-8 overflow-y-auto rounded-xl bg-surface px-4 py-8 md:h-4/5 md:w-4/5 bg-bg"
     >
       <Heading />
       <AddTaskBar />
@@ -35,7 +35,7 @@ const Todo = () => {
 
 const Heading = () => {
   return (
-    <h1 className="flex items-center gap-2 text-3xl font-semibold tracking-wide lg:justify-center">
+    <h1 className="flex items-center gap-2 text-3xl font-semibold tracking-wide lg:justify-center text-text-primary">
       To-Do List
       <img
         className="inline h-12 bg-white md:h-10"

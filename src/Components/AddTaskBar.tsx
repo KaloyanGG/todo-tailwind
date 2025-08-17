@@ -41,7 +41,7 @@ const AddTaskBar = () => {
   return (
     <form
       id="add-task-bar"
-      className="flex justify-between rounded-full bg-gray-200 pl-4 focus-within:outline-2"
+      className="flex justify-between rounded-full bg-bg-light pl-4 focus-within:outline-2"
       onSubmit={handleFormSubmit}
     >
       <input
@@ -97,7 +97,7 @@ const AddTaskBar = () => {
       </div>
       <button
         type="submit"
-        className="w-1/5 min-w-24 rounded-full bg-primary text-white"
+        className="cursor-pointer w-1/5 min-w-24 rounded-full bg-primary text-white"
       >
         ADD
       </button>
