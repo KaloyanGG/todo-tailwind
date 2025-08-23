@@ -1,8 +1,5 @@
 @import "tailwindcss";
 
-/* TODO change all colors, see video for the colors
- */
-
 @theme {
   --color-bg-dark: hsl(0 0% 90%);
   --color-bg: hsl(0 0% 95%);

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTheme } from "../hooks/useTheme";
 
 type Theme = "light" | "dark";
 type SizeToken = "small" | "medium" | "large" | number;
@@ -21,20 +22,8 @@ const toPx = (size: SizeToken | undefined): string => {
 }
 
 const ChangeThemeButton = ({ size = "medium" }: ChangeThemeButtonProps) => {
-
-  const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem("theme");
-    if (stored === "light" || stored === "dark") return stored;
-    return matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-  });
-
-  useEffect(() => {
-    const root = document.documentElement;
-    root.setAttribute("data-theme", theme);
-    // root.style.colorScheme = theme;
-    localStorage.setItem("theme", theme);
-  }, [theme])
-
+  const [theme, setTheme] = useTheme();
+  
   const handleChangeTheme = () => {
     setTheme((oldTheme) => oldTheme === 'light' ? 'dark' : 'light');
   };
