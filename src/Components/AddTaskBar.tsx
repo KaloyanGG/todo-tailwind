@@ -41,12 +41,12 @@ const AddTaskBar = () => {
   return (
     <form
       id="add-task-bar"
-      className="flex justify-between rounded-full bg-gray-200 pl-4 focus-within:outline-2"
+      className="flex justify-between rounded-full bg-bg-light pl-4 focus-within:outline-2"
       onSubmit={handleFormSubmit}
     >
       <input
         placeholder="Add your task"
-        className="h-12 w-4/5 outline-none"
+        className="h-12 w-4/5 outline-none placeholder:text-text-muted text-text-primary"
         type="text"
         id="task-input"
         name="task-input"
@@ -55,7 +55,7 @@ const AddTaskBar = () => {
       <div id="reminder-container" className="flex w-2/5 items-center">
         {showReminderLabel ? (
           <button
-            className="h-full w-full text-start text-[var(--gray)]"
+            className="h-full w-full text-start text-text-muted"
             onClick={() => {
               setShowReminderLabel(false);
             }}
@@ -70,7 +70,7 @@ const AddTaskBar = () => {
             name="reminder"
             id="reminder"
             value={reminderValue}
-            className={` text-xs w-full p-1 ${reminderValue ? 'text-black' : 'text-[var(--gray)]'} outline-none`}
+            className={` text-xs w-full p-1 ${reminderValue ? 'text-text-primary' : 'text-[var(--gray)]'} outline-none`}
             min={new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60_000).toISOString().slice(0, 16)}
             onFocus={() => {
               if (!reminderValue) {
@@ -97,7 +97,7 @@ const AddTaskBar = () => {
       </div>
       <button
         type="submit"
-        className="w-1/5 min-w-24 rounded-full bg-[var(--orange)] text-white"
+        className="cursor-pointer w-1/5 min-w-24 rounded-full bg-primary text-text-primary font-medium"
       >
         ADD
       </button>

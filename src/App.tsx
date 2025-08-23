@@ -6,6 +6,7 @@ import { auth } from "./config/firebase";
 import { listenToTodos } from "./services/todo.service";
 import DevTools from "./components/DevTools";
 import Login from "./components/Login";
+import ChangeThemeButton from "./components/ChangeThemeButton";
 
 function App() {
   const [todoList, setTodoList] = useState<Record<string, TodoItem>>({});
@@ -34,13 +35,14 @@ function App() {
     };
   }, [isAuthenticated]);
 
-  if (checkingAuth) return <div className="h-screen w-screen bg-rose-100" />;
+  if (checkingAuth) return <div className="h-screen w-screen bg-dark" />;
 
   if (!isAuthenticated)
     return <Login onLogin={() => setIsAuthenticated(true)} />;
 
   return (
-    <main className="flex h-svh min-h-svh bg-rose-100">
+    <main className="flex h-svh min-h-svh bg-bg-dark">
+      <ChangeThemeButton/>
       <button className="text-sm z-30 fixed right-2 top-2 bg-cyan-500 p-2 rounded-full" onClick={() => setDevToolsShown(!devToolsShown)}>Open Dev Tools</button>
       <DevTools hidden={!devToolsShown} />
       <TodoListContext.Provider value={{ todoList }}>
