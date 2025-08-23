@@ -42,7 +42,7 @@ const ChangeThemeButton = ({ size = "medium" }: ChangeThemeButtonProps) => {
   return (
     <button id="change-theme"
       style={{ ["--size" as any]: toPx(size) }}
-      className="w-[var(--size)] h-[var(--size)] text-[calc(var(--size)*0.5)] rounded-full hover:bg-orange-200"
+      className="w-[var(--size)] absolute h-[var(--size)] text-[calc(var(--size)*0.5)] rounded-full hover:bg-orange-200"
       onClick={handleChangeTheme}
     >
       {theme === "light" ? "☀️" : "🌙"}
