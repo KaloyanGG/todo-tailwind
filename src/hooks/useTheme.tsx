@@ -10,10 +10,11 @@ export const useTheme = (): [Theme, Dispatch<SetStateAction<Theme>>] => {
   })
 
   useEffect(() => {
-    const root = document.documentElement;
-    root.setAttribute("data-theme", theme);
-    // root.style.colorScheme = theme;
-    localStorage.setItem("theme", theme);
+    document.startViewTransition(()=>{
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+    })
+    // document.documentElement.style.colorScheme = theme;
   }, [theme]);
 
   return [theme, setTheme];
