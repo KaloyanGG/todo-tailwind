@@ -27,6 +27,11 @@
 }
 
 @layer base {
+  :root {
+    --vt-x: 50%;
+    --vt-y: 0%;
+  }
+
   * {
     font-family: "Poppins", sans-serif;
   }
@@ -53,11 +58,11 @@
 
   @keyframes circle-in {
     from {
-      clip-path: circle(0 at 0% 0%);
+      clip-path: circle(0 at var(--vt-x) var(--vt-y));
     }
+
     to {
-      clip-path: circle(150% at 0% 0%);
+      clip-path: circle(150% at var(--vt-x) var(--vt-y));
     }
   }
-
 }

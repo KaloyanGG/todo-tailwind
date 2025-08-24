@@ -23,15 +23,23 @@ const toPx = (size: SizeToken | undefined): string => {
 
 const ChangeThemeButton = ({ size = "medium" }: ChangeThemeButtonProps) => {
   const [theme, setTheme] = useTheme();
-  
-  const handleChangeTheme = () => {
+
+  const handleChangeTheme = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const root = document.documentElement;
+    const r = e.currentTarget.getBoundingClientRect();
+    const x = r.left + r.width / 2;
+    const y = r.top + r.height / 2;
+
+    root.style.setProperty("--vt-x", `${x}px`);
+    root.style.setProperty("--vt-y", `${y}px`);
+
     setTheme((oldTheme) => oldTheme === 'light' ? 'dark' : 'light');
   };
 
   return (
     <button id="change-theme"
       style={{ ["--size" as any]: toPx(size) }}
-      className="w-[var(--size)] absolute h-[var(--size)] text-[calc(var(--size)*0.5)] rounded-full hover:bg-orange-200"
+      className="w-[var(--size)] sm:top-2 sm:left-2 absolute h-[var(--size)] text-[calc(var(--size)*0.5)] rounded-full hover:bg-orange-200"
       onClick={handleChangeTheme}
     >
       {theme === "light" ? "☀️" : "🌙"}
