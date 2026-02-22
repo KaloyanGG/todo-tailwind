@@ -43,8 +43,12 @@ function App() {
   return (
     <main className="flex h-svh min-h-svh bg-bg-dark">
       <ChangeThemeButton/>
-      <button className="text-sm z-30 fixed right-2 top-2 bg-cyan-500 p-2 rounded-full" onClick={() => setDevToolsShown(!devToolsShown)}>Open Dev Tools</button>
-      <DevTools hidden={!devToolsShown} />
+      {!import.meta.env.PROD && (
+        <>
+          <button className="text-sm z-30 fixed right-2 top-2 bg-cyan-500 p-2 rounded-full" onClick={() => setDevToolsShown(!devToolsShown)}>Open Dev Tools</button>
+          <DevTools hidden={!devToolsShown} />
+        </>
+      )}
       <TodoListContext.Provider value={{ todoList }}>
         <Todo />
       </TodoListContext.Provider>
