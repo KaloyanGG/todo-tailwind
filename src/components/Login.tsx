@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useRef, type FormEvent } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 
 export default function Login({ onLogin }: { onLogin: () => void }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
-  const handleLogin = async () => {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    const email = emailRef.current?.value ?? "";
+    const password = passwordRef.current?.value ?? "";
     try {
       await signInWithEmailAndPassword(auth, email, password);
       onLogin();
@@ -16,22 +19,24 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
   };
 
   return (
-    <div className="p-4">
+    <form onSubmit={handleSubmit} className="p-4">
       <input
+        ref={emailRef}
         type="email"
+        name="email"
+        autoComplete="email"
         placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
         className="mb-2 block"
       />
       <input
+        ref={passwordRef}
         type="password"
+        name="password"
+        autoComplete="current-password"
         placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
         className="mb-2 block"
       />
-      <button onClick={handleLogin}>Login</button>
-    </div>
+      <button type="submit">Login</button>
+    </form>
   );
 }
