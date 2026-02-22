@@ -1,11 +1,14 @@
 import useTodoListContext from "../hooks/useTodoListContext";
 import { deleteTodo, toggleTodoStatus } from "../services/todo.service";
 import TodoItem from "./TodoItem";
+import type { Timestamp } from "firebase/firestore";
 
 type Status = "active" | "done";
 export type TodoItemType = {
   content: string;
   status: Status;
+  reminder: Timestamp | null;
+  notified: boolean;
 };
 
 const TodoList = () => {
@@ -20,7 +23,7 @@ const TodoList = () => {
   };
 
   return (
-    <div id="todo-list" className="space-y-3 overflow-y-auto">
+    <div id="todo-list" className="space-y-3">
       {Object.entries(todoList).map(([id, todoItem]) => {
         return (
           <TodoItem

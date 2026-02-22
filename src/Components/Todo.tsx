@@ -2,6 +2,7 @@ import AddTaskBar from "./AddTaskBar";
 import TodoList from "./TodoList";
 import { useEffect } from "react";
 import { requestNotificationsPermission } from "../services/notifications.service";
+import type { Timestamp } from "firebase/firestore";
 
 export const STATUSES = {
   ACTIVE: "active",
@@ -11,7 +12,7 @@ export type Status = (typeof STATUSES)[keyof typeof STATUSES];
 export type TodoItem = {
   content: string;
   status: Status;
-  reminder: Date | null;
+  reminder: Timestamp | null;
   notified: boolean;
 };
 

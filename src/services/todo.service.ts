@@ -13,8 +13,14 @@ import {
 import type { Status, TodoItem } from "../components/Todo";
 import { db } from "../config/firebase";
 
+type AddTodoInput = {
+  content: string;
+  status: Status;
+  reminder: Date | null;
+};
+
 const COLLECTION_NAME = "todos";
-export const addTodo = async (todo: Omit<TodoItem, 'notified'>) => {
+export const addTodo = async (todo: AddTodoInput) => {
   const { content, status, reminder } = todo;
   const todoRef = collection(db, COLLECTION_NAME);
   const docRef = await addDoc(todoRef, {
@@ -52,4 +58,12 @@ export const toggleTodoStatus = async (id: string, newStatus: Status) => {
 export const deleteTodo = async (id: string) => {
   const todoRef = doc(db, "todos", id);
   await deleteDoc(todoRef);
+};
+
+export const setTodoReminder = async (id: string, reminder: Date | null) => {
+  const todoRef = doc(db, "todos", id);
+  await updateDoc(todoRef, {
+    reminder: reminder ? Timestamp.fromDate(reminder) : null,
+    notified: false,
+  });
 };

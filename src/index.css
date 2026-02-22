@@ -12,7 +12,8 @@
 }
 
 [data-theme="dark"] {
-  input#reminder {
+  input#reminder,
+  input[type="datetime-local"] {
     color-scheme: dark;
   }
 
